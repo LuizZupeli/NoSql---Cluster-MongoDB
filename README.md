@@ -15,4 +15,7 @@ podem ser promovidos a primário caso ele falhe.
 # *Arbiter* # (Opcional): Um nó que não armazena dados, mas participa das 
 eleições para escolher um novo primário em caso de falha.
 
-ker run -d --rm -p 27017:27017 --name nos1 --network clusterDB mongodb/mongodb-community-server:latest --replSet replicaSet --bind_ip localhost,nos1
+
+Comando para criar um cluster no Docker
+
+docker network create clusterDB
