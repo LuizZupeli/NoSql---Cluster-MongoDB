@@ -18,4 +18,4 @@ eleições para escolher um novo primário em caso de falha.
 
 Comando para criar um cluster no Docker
 
-docker network create clusterDB
+`docker network create clusterDB`
