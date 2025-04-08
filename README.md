@@ -1,4 +1,4 @@
-# NoSql---Cluster-MongoDB
+![{320FEBA9-E733-402D-8DDF-3D7EE5E232E5}](https://github.com/user-attachments/assets/e19b3f78-4948-4fa2-ae14-6f6bafad1568)# NoSql---Cluster-MongoDB
 Criação de um cluster para MongoDB com Docker
 
 # **O que é um cluster?**
@@ -80,8 +80,20 @@ Nó4
 
 #### mongodb://127.0.0.1:27020/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.4.2
 
+Já conectados os outros nós, podemos testa-los para ver se os dados estao sendo repassados, usando o banco de dados alunos:
+
+`use alunos` seguido do comando `db.matricula.find()`  para a visualização dos dados. Executar os comandos nos Nós para averiguar se estão funcionando.
 
 
+# Forçando a queda de 1 ou 2 Nós
+
+Para a queda dos Nós utilizaremos o seguinte comando no terminal do docker:
+
+`docker stop mach2` em seguida voltamos para o MongoDB para executar um comando para chamar os dados do segundo Nó `db.matricula.find()`
+
+derrubando o terceiro nó tambem `docker stop mach3`, podemos evidenciar que os dados só foram replicados para o nó primario **mach1** e para o quarto Nó **mach4**
+
+agora retornamos o segundo e terceiro nó no docker, com o comando já visto anteriormente, os dados devem ser replicados novamente no MongoDB.
 
 
 
