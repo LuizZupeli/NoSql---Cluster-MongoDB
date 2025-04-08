@@ -1,4 +1,18 @@
-Criação de um cluster para MongoDB com Docker
+# Criação de um cluster para MongoDB com Docker
+
+### Integrantes do Grupo
+
+**GABRIEL RODRIGUES DE LUNA RA: 2301409** 
+
+**GABRIEL SANTOS DE OLIVEIRA RA: 2209987** 
+
+**GABRIELLE SOARES DE OLIVEIRA RA: 2305296**
+
+**LEONARDO DA SILVA FRANCO RA: 2301782**
+
+**LUIZ FELIPE DE SÁ ZUPELI RA: 2306039**
+
+----------------------------------------------------------------------------------------------
 
 # **O que é um cluster?**
 CLuster é um conjunto de servidores que trabalham em conjuto para fornecer mais escabilidade, 
@@ -26,13 +40,13 @@ Onde o comando **docker** run para a criação de um container o **-d** e usado 
 
 Logo em seguida faremos os outros nós, aplicando o mesmo comando apenas alterando o nome dos nós e sus respectivas portas de conexão.
 
-Nó 2 
+##### **Nó 2**
 `docker run -d --rm -p 27018:27017 --name mach2 --network clusterDB mongodb/mongodb-community-server:latest --replSet rs1 --bind_ip localhost,mach2`
 
-Nó 3
+##### Nó 3
 `docker run -d --rm -p 27019:27017 --name mach3 --network clusterDB mongodb/mongodb-community-server:latest --replSet rs1 --bind_ip localhost,mach3`
 
-Nó 4 
+##### Nó 4 
 `docker run -d --rm -p 27020:27017 --name mach4 --network clusterDB mongodb/mongodb-community-server:latest --replSet rs1 --bind_ip localhost,mach4`
 
 É interessante tambem adcinarmos um Nó arbitro, que será responsavel por fazer as escolhas de qual Nó se tornará o primario caso o primeiro Nó seja derrubado. Para isso utilizaremos o seguite comando.
@@ -105,6 +119,12 @@ Retornar o Nó3
 De volta ao MongoDB iremos averiguar se os dados realmente foram replicados, basta apenas buscas os dados no segundo e terceiro nó.
 
 `db.matricula.find()`
+
+# Outras funcionalidades do Cluster que não foram pedidadas no trabalho
+
+Há algumas funcionalidades a serem resaltadas como o processamento paralelo onde o cluster transforma uma tarefa complexa em várias simples e as distribui entre os nós integrados ao sistema.
+Há tambem clusters load balancing, uma estrutura de cluster completamente unida. Aqui, todos fazem o trabalho de um. Todos os nós são responsáveis pelas tarefas que estão sendo executadas. Eles unem os seus recursos disponíveis para realizar qualquer tarefa. Desde a mais simples até a mais complexa. Caso algum computador falhe, ele é retirado do sistema cluster de modo que as tarefas são redistribuídas entre os que permaneceram interligados entre si.
+
 
 
 
