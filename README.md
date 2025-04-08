@@ -36,7 +36,7 @@ Comando para criar um cluster no Docker
 Para criarmos o primeiro no iremos utilizar o seguinte comando.
 `docker run -d --rm -p 27017:27017 --name mach1 --network clusterDB mongodb/mongodb-community-server:latest --replSet rs1 --bind_ip localhost,mach1`
 
-Onde o comando **docker** run para a criação de um container o **-d** e usado para executar o container em segundo plano, o –rm é usado para caso o contêiner seja parado ele seja removido, o -p 27017:27017 usa a porta 27017 do host para a porta 27017 do MongoDB, o –name no1 nomeia o cluster com o nome no1, –network clusterDB, usado para conectar a rede criada anteriormente, mongodb/mongodb-community-server:latest usado para a imagem do container, –replSet replicaSet usado para dar nome ao replica Set como replicaSet, --bind_ip localhost,no1 diz ao MongoDB para aceitar as conexões do localhost.
+Onde o comando **docker** run para a criação de um container o **-d** e usado para executar o container em segundo plano, o –rm é usado para caso o contêiner seja parado ele seja removido, o -p 27017:27017 usa a porta 27017 do host para a porta 27017 do MongoDB, o –name no1 nomeia o cluster com o nome no1, –network clusterDB, usado para conectar a rede criada anteriormente, mongodb/mongodb-community-server:latest usado para a imagem do container, **–replSet** replicaSet usado para dar nome ao replica Set como rs1, --bind_ip localhost,mach1 diz ao MongoDB para aceitar as conexões do localhost.
 
 Logo em seguida faremos os outros nós, aplicando o mesmo comando apenas alterando o nome dos nós e sus respectivas portas de conexão.
 
