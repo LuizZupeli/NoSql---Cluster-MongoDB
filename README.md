@@ -1,4 +1,3 @@
-![{320FEBA9-E733-402D-8DDF-3D7EE5E232E5}](https://github.com/user-attachments/assets/e19b3f78-4948-4fa2-ae14-6f6bafad1568)# NoSql---Cluster-MongoDB
 Criação de um cluster para MongoDB com Docker
 
 # **O que é um cluster?**
@@ -95,7 +94,17 @@ derrubando o terceiro nó tambem `docker stop mach3`, podemos evidenciar que os 
 
 agora retornamos o segundo e terceiro nó no docker, com o comando já visto anteriormente, os dados devem ser replicados novamente no MongoDB.
 
+Retornar o Nó2
 
+`docker run -d --rm -p 27018:27017 --name mach2 --network clusterDB mongodb/mongodb-community-server:latest --replSet rs1 --bind_ip localhost,mach2`
+
+Retornar o Nó3
+
+`docker run -d --rm -p 27019:27017 --name mach3 --network clusterDB mongodb/mongodb-community-server:latest --replSet rs1 --bind_ip localhost,mach3`
+
+De volta ao MongoDB iremos averiguar se os dados realmente foram replicados, basta apenas buscas os dados no segundo e terceiro nó.
+
+`db.matricula.find()`
 
 
 
