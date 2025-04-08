@@ -54,7 +54,35 @@ Podendo ja sair do mongosh
 
 # **Abrir MongoDB**
 Com o MongoDB aberto iremos iniciar uma conexao copiando com aquela url que copiamos no Docker e colar na url de conexao do MongoDB.
+
 `mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.4.2`
+
+Já conectados criaremos um banco de dados chamado alunos
+
+`use alunos`
+
+Ja podendo inserir alguns dados no banco no primeiro Nó com a porta 27017 com os seguintes comandos:
+
+`db.matricula.insertOne({codigo:1, nome: "Luiz", telefone: "93939393"});`
+
+`db.matricula.insertOne({codigo:1, nome: "Leonardo", telefone: "94567399"});`
+
+Feito isso podemos começar a conectar os outros nós com portas 27018, 27019 e 27020. Lembrando que é só copiar a url e trocar a porta de conexão:
+Nó2
+
+#### mongodb://127.0.0.1:27018/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.4.2
+
+Nó3
+
+#### mongodb://127.0.0.1:27019/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.4.2
+
+Nó4
+
+#### mongodb://127.0.0.1:27020/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.4.2
+
+
+
+
 
 
 
