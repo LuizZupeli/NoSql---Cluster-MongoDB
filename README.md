@@ -11,7 +11,7 @@ dos dados para garantir tolerância a falhas. Ele é composto por:
 Primária: O nó principal que recebe operações de escrita e leitura.
 Secundárias: Nós secundários que replicam os dados do nó primário e
 podem ser promovidos a primário caso ele falhe.
-# *Arbiter* # (Opcional): Um nó que não armazena dados, mas participa das 
+Arbiter (Opcional): Um nó que não armazena dados, mas participa das 
 eleições para escolher um novo primário em caso de falha.
 
 
