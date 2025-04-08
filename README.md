@@ -21,32 +21,33 @@ Comando para criar um cluster no Docker
 `docker network create clusterDB`
 
 Para criarmos o primeiro no iremos utilizar o seguinte comando.
-`docker run -d --rm -p 27017:27017 --name nos1 --network clusterDB mongodb/mongodb-community-server:latest --replSet replicaSet --bind_ip localhost,nos1`
+`docker run -d --rm -p 27017:27017 --name mach1 --network clusterDB mongodb/mongodb-community-server:latest --replSet rs1 --bind_ip localhost,mach1`
+
 Onde o comando **docker** run para a criação de um container o **-d** e usado para executar o container em segundo plano, o –rm é usado para caso o contêiner seja parado ele seja removido, o -p 27017:27017 usa a porta 27017 do host para a porta 27017 do MongoDB, o –name no1 nomeia o cluster com o nome no1, –network clusterDB, usado para conectar a rede criada anteriormente, mongodb/mongodb-community-server:latest usado para a imagem do container, –replSet replicaSet usado para dar nome ao replica Set como replicaSet, --bind_ip localhost,no1 diz ao MongoDB para aceitar as conexões do localhost.
 
 Logo em seguida faremos os outros nós, aplicando o mesmo comando apenas alterando o nome dos nós e sus respectivas portas de conexão.
 
 Nó 2 
-`docker run -d --rm -p 27018:27017 --name nos2 --network clusterDB mongodb/mongodb-community-server:latest --replSet replicaSet --bind_ip localhost,nos2`
+`docker run -d --rm -p 27018:27017 --name mach2 --network clusterDB mongodb/mongodb-community-server:latest --replSet rs1 --bind_ip localhost,mach2`
 
 Nó 3
-`docker run -d --rm -p 27019:27017 --name nos3 --network clusterDB mongodb/mongodb-community-server:latest --replSet replicaSet --bind_ip localhost,nos3`
+`docker run -d --rm -p 27019:27017 --name mach3 --network clusterDB mongodb/mongodb-community-server:latest --replSet rs1 --bind_ip localhost,mach3`
 
 Nó 4 
-```docker run -d --rm -p 27020:27017 --name nos4 --network clusterDB mongodb/mongodb-community-server:latest --replSet replicaSet --bind_ip localhost,nos4```
+`docker run -d --rm -p 27020:27017 --name mach4 --network clusterDB mongodb/mongodb-community-server:latest --replSet rs1 --bind_ip localhost,mach4`
 
 É interessante tambem adcinarmos um Nó arbitro, que será responsavel por fazer as escolhas de qual Nó se tornará o primario caso o primeiro Nó seja derrubado. Para isso utilizaremos o seguite comando.
-`docker run -d --rm --name arbiter --network clusterDB mongodb/mongodb-community-server:latest --replSet replicaSet --bind_ip localhost,arbiter`
+
+`docker run -d --rm --name arbiter --network clusterDB mongodb/mongodb-community-server:latest --replSet rs1 --bind_ip localhost,arbiter`
 
 Após os nós já terem sido adicionados iremos rodar o seguinte comando para acessar a ferramenta mongosh dentro do própio Docker.
-`docker exec -it nos1 mongosh`
+`docker exec -it mach1 mongosh`
 No terminal do Docker ele retornará uma url de conexão que usaremos futuramente no MongoDB.
 
-##**mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTime
-outMS=2000&appName=mongosh+2.4.2**
+##**mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.4.2
 
 Apos isso iremos realizar o seguinte comando abaixo para criar um replicaSet, com o seguinte comando rs.initiate:
-``
+`rs.initiate ({ _id: "rs1", members:[{_id:0, host: "mach1"}, {_id:1, host: "mach2"}, {_id:2, host: "mach3"}, {_id:3, host: "mach4"}, {_id:4, host:"arbiter", arbiterOnly: true}]})`
 
 Podendo ja sair do mongosh
 `exit`
