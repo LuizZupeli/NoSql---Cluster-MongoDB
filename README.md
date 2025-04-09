@@ -15,7 +15,7 @@
 ----------------------------------------------------------------------------------------------
 
 # **O que é um cluster?**
-CLuster é um conjunto de servidores que trabalham em conjuto para fornecer mais escabilidade, 
+Cluster é um conjunto de servidores que trabalham em conjuto para fornecer mais escabilidade, 
 desempenho e disponibilidade para algumas aplicações. Comumente usado em banco de dados e 
 armazenamento de dados
 # **Como o MongoDB trabalha?**
